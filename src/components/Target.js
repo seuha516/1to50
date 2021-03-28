@@ -4,8 +4,10 @@ import "./Target.scss";
 const Target = () => {
   return (
     <>
-      <div className="Text">Next</div>
-      <div className="Target">37</div>
+      <div className="Box">
+        {/* <div className="Text">Next</div> */}
+        <div className="Target">37</div>
+      </div>
     </>
   );
 };
