@@ -1,12 +1,12 @@
 import React from "react";
 import "./Target.scss";
 
-const Target = () => {
+const Target = ({ target }) => {
   return (
     <>
       <div className="Box">
         <div className="Text">Next</div>
-        <div className="Target">37</div>
+        <div className="Target">{target}</div>
       </div>
     </>
   );

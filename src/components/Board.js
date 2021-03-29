@@ -1,7 +1,8 @@
 import React from "react";
 import "./Board.scss";
+import Cell from "./Cell";
 
-const Board = ({ list, wait, onStartClick }) => {
+const Board = ({ list, wait, onStartClick, onClick }) => {
   return (
     <>
       <div className="Board">
@@ -14,13 +15,13 @@ const Board = ({ list, wait, onStartClick }) => {
             {list.map((line) => (
               <ul key={line[0].id} className="Line">
                 {line.map((cell) => (
-                  <li key={cell.id} className="Cell">
-                    {cell.value}
-                  </li>
+                  <Cell key={cell.id} value={cell.value} onClick={onClick} />
                 ))}
               </ul>
             ))}
           </ul>
+        ) : wait === 999 ? (
+          <div className="RestartButton">Restart</div>
         ) : (
           <div className="Countdown">{wait}</div>
         )}
