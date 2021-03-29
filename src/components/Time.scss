@@ -1,8 +1,11 @@
 .Time {
   color: rgb(255, 184, 184);
-  height: 50px;
+  height: 60px;
   font-size: 45px;
   letter-spacing: 1px;
   font-family: "Righteous", cursive;
   text-shadow: 0 2px rgb(128, 105, 255);
+  display: table-cell;
+  vertical-align: middle;
+  margin-left: 40px;
 }
