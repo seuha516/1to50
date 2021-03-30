@@ -1,20 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
+import * as fn from "../utils/functions";
 import "./Time.scss";
 
-const Time = () => {
+const Time = forwardRef((props, ref) => {
   const [time, setTime] = useState(0);
-  const min =
-    Math.floor(time / 100) < 10
-      ? "0" + String(Math.floor(time / 100))
-      : String(Math.floor(time / 100));
-  const sec = time % 100 < 10 ? "0" + String(time % 100) : String(time % 100);
-  useEffect(() => {
-    let TIMER = setInterval(() => {
-      setTime((time) => time + 5);
-    }, 50);
-    return () => clearInterval(TIMER);
-  });
+  const [min, sec] = fn.makeTimer(time);
+  const TIMER = useRef(null);
+  useImperativeHandle(ref, () => ({
+    timerStart() {
+      TIMER.current = setInterval(() => {
+        setTime((time) => time + 1);
+      }, 10);
+    },
+    timerStop() {
+      clearInterval(TIMER.current);
+    },
+  }));
   return <div className="Time">{`${min}:${sec}`}</div>;
-};
+});
 
 export default Time;

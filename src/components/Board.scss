@@ -41,14 +41,19 @@
   transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 .RestartButton {
-  color: rgba(0, 0, 0, 0.692);
+  color: rgba(0, 255, 149, 0.692);
   width: 182px;
   height: 70px;
-  margin-top: 50px;
+  margin-top: -15px;
   font-size: 60px;
   letter-spacing: 0px;
-  text-shadow: -2px 0 rgba(176, 255, 165, 0.3), 0 2px rgba(176, 255, 165, 0.3),
-    2px 0 rgba(176, 255, 165, 0.3), 0 -2px rgba(176, 255, 165, 0.3);
   font-family: "Londrina Solid", cursive;
   cursor: pointer;
+  &:hover {
+    text-shadow: -2px 0 rgba(176, 255, 165, 0.3), 0 2px rgba(176, 255, 165, 0.3),
+      2px 0 rgba(176, 255, 165, 0.3), 0 -2px rgba(176, 255, 165, 0.3);
+    outline-color: rgb(255, 255, 255);
+    outline-offset: 30px;
+    text-shadow: 2px 2px 2px #427388;
+  }
 }

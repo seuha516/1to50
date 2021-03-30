@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Board from "./components/Board";
 import Target from "./components/Target";
 import Time from "./components/Time";
@@ -6,41 +6,43 @@ import Title from "./components/Title";
 import "./components/Mainsetting.scss";
 import * as fn from "./utils/functions";
 import * as sound from "./utils/sound";
+import Result from "./components/Result";
 
 const App = () => {
   const [boardstate, setBoardstate] = useState(fn.createArray(5, 5)); //보드 2차원 배열
   const [target, setTarget] = useState(""); //다음 타겟
-  const [wait, setWait] = useState(-1); //-1: 시작 전, 1~3: 카운트다운, 0: 게임중
+  const [wait, setWait] = useState(-1); //-1: 시작 전, 1~3: 카운트다운, 0: 게임중, 999: 재시작 대기
+  const [leftnums, setLeftnums] = useState(fn.setList()); //보드에 없는 남은 숫자들
+
+  const timeComponent = useRef(); //타이머 컴포넌트 Ref
+
+  //시작 버튼 클릭
   const onStartClick = async () => {
-    //시작 버튼 클릭
-    setWait(3);
-    sound.countdownStart();
-    for (let i = 2; i >= 0; i--) await fn.delaySetWait(setWait, i);
     setTarget(1);
     setBoardstate(fn.setArray(5, 5));
+    setLeftnums(fn.setList());
+    sound.countdownStart();
+    setWait(3);
+    for (let i = 2; i >= 0; i--) await fn.delaySetWait(setWait, i);
+    timeComponent.current.timerStart();
   };
+  //숫자 칸 클릭
   const onClick = (e) => {
-    //숫자 클릭
     if (e.target.textContent === String(target)) {
       sound.correctbuttonClick();
-      if (target >= 26) {
+      let [nextnum, nextleftnums] = fn.findnextnum(leftnums);
+      console.log(nextnum, nextleftnums);
+      setLeftnums(nextleftnums);
+      setBoardstate(
         boardstate.map((line) =>
-          line.map((cell) => (cell.value === target ? (cell.value = "") : cell))
-        );
-      } else {
-        let nextnum = fn.findnextnum(boardstate, target);
-        setBoardstate(
-          boardstate.map((line) =>
-            line.map((cell) =>
-              cell.value === target ? { id: nextnum, value: nextnum } : cell
-            )
+          line.map((cell) =>
+            cell.value === target ? { id: target + 50, value: nextnum } : cell
           )
-        );
-      }
-      if (target === 5) {
-        setBoardstate(fn.createArray(5, 5));
-        setTarget("");
+        )
+      );
+      if (target === 50) {
         setWait(999);
+        timeComponent.current.timerStop();
         sound.gameWin();
       } else {
         setTarget((target) => target + 1);
@@ -52,13 +54,13 @@ const App = () => {
 
   return (
     <div className="Items">
-      <Title />
-      {wait === 0 ? (
+      <Title marginBottom={wait === 999 ? true : false} />
+      {(wait === 0 || wait === 999) && (
         <div className="Info">
-          <Target target={target} />
-          <Time />
+          {wait === 0 ? <Target target={target} /> : <Result />}
+          <Time ref={timeComponent} />
         </div>
-      ) : null}
+      )}
       <Board
         list={boardstate}
         wait={wait}

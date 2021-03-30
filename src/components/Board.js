@@ -21,7 +21,9 @@ const Board = ({ list, wait, onStartClick, onClick }) => {
             ))}
           </ul>
         ) : wait === 999 ? (
-          <div className="RestartButton">Restart</div>
+          <div className="RestartButton" onClick={onStartClick}>
+            Restart
+          </div>
         ) : (
           <div className="Countdown">{wait}</div>
         )}
