@@ -5,7 +5,6 @@ const Target = ({ target }) => {
   const targetNumber = useRef(null);
   useEffect(() => {
     if (!targetNumber.current) return;
-    console.log(targetNumber.current.children);
     targetNumber.current.animate(
       [{ marginLeft: "90px" }, { marginLeft: "0px" }],
       {

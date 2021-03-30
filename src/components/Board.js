@@ -2,11 +2,10 @@ import React, { useEffect, useRef } from "react";
 import "./Board.scss";
 import Cell from "./Cell";
 
-const Board = ({ list, wait, onStartClick, onClick }) => {
+const Board = ({ list, wait, onStartClick, onClick, target }) => {
   const Count = useRef(null);
   useEffect(() => {
     if (!Count.current) return;
-    console.log(Count.current);
     Count.current.animate([{ fontSize: "150px" }, { fontSize: "0px" }], {
       duration: 500,
       easing: "cubic-bezier(.66,.11,1,-0.08)",
@@ -25,7 +24,12 @@ const Board = ({ list, wait, onStartClick, onClick }) => {
             {list.map((line) => (
               <ul key={line[0].id} className="Line">
                 {line.map((cell) => (
-                  <Cell key={cell.id} value={cell.value} onClick={onClick} />
+                  <Cell
+                    key={cell.id}
+                    value={cell.value}
+                    onClick={onClick}
+                    target={target}
+                  />
                 ))}
               </ul>
             ))}

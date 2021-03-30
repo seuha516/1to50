@@ -23,11 +23,11 @@ const App = () => {
     setLeftnums(fn.setList());
     sound.countdownStart();
     setWait(3);
-    for (let i = 2; i >= 0; i--) await fn.delaySetWait(setWait, i);
+    for (let i = 2; i >= 0; i--) await fn.delaySetWait(setWait, i, 1000);
     timeComponent.current.timerStart();
   };
   //숫자 칸 클릭
-  const onClick = (e) => {
+  const onClick = async (e) => {
     if (e.target.textContent === String(target)) {
       sound.correctbuttonClick();
       let [nextnum, nextleftnums] = fn.findnextnum(leftnums);
@@ -75,6 +75,7 @@ const App = () => {
       <Board
         list={boardstate}
         wait={wait}
+        target={target}
         onStartClick={onStartClick}
         onClick={onClick}
       />

@@ -60,10 +60,10 @@ export const makeTimer = (time) => {
   return [min, sec];
 };
 // 1초 후에 fn(x)를 실행하는 promise
-export const delaySetWait = (fn, x) =>
+export const delaySetWait = (fn, x, delay) =>
   new Promise((resolve) => {
     setTimeout(() => {
       fn(x);
       resolve();
-    }, 1000);
+    }, delay);
   });
