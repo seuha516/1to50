@@ -3,8 +3,12 @@ import "./Cell.scss";
 
 const Cell = ({ value, onClick, target }) => {
   const newCell = useRef(null);
+  const pass = useRef(true);
   useEffect(() => {
-    if (!newCell.current || target === 1) return;
+    if (target > 1) pass.current = false;
+  }, [target]);
+  useEffect(() => {
+    if (!newCell.current || pass.current) return;
     newCell.current.animate(
       [
         { fontSize: "25px", backgroundColor: "rgba(110, 255, 122, 0.541)" },
