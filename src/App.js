@@ -31,7 +31,6 @@ const App = () => {
     if (e.target.textContent === String(target)) {
       sound.correctbuttonClick();
       let [nextnum, nextleftnums] = fn.findnextnum(leftnums);
-      console.log(nextnum, nextleftnums);
       setLeftnums(nextleftnums);
       setBoardstate(
         boardstate.map((line) =>
@@ -49,6 +48,18 @@ const App = () => {
       }
     } else {
       sound.wrongbuttonClick();
+      e.target.animate(
+        [
+          { backgroundColor: "rgba(238, 78, 78, 0)" },
+          { backgroundColor: "rgba(238, 78, 78, 0.705)" },
+          { backgroundColor: "rgba(238, 78, 78, 0)" },
+        ],
+        {
+          duration: 500,
+          easing: "cubic-bezier(.32,.86,.73,.19)",
+          fill: "forwards",
+        }
+      );
     }
   };
 
