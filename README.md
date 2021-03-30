@@ -10,7 +10,4 @@
 * Tech: *React*
 * 구현 기능:
   * 1 to 50 게임 구현
-  * 다음 숫자 표시 및 기록 측정 기능
-
-## Other
-* [Deploy by Heroku](https://dashboard.heroku.com/apps/seuha516-1to50)
+  * 다음 숫자 표시 및 기록 측정 기
