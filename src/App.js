@@ -27,7 +27,8 @@ const App = () => {
     timeComponent.current.timerStart();
   };
   //숫자 칸 클릭
-  const onClick = async (e) => {
+  const onClick = (e) => {
+    if (e.target.textContent === "") return;
     if (e.target.textContent === String(target)) {
       sound.correctbuttonClick();
       let [nextnum, nextleftnums] = fn.findnextnum(leftnums);
