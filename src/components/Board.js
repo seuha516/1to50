@@ -22,7 +22,7 @@ const Board = ({ list, wait, onStartClick, onClick, target }) => {
         ) : wait === 0 ? (
           <ul>
             {list.map((line) => (
-              <ul key={line[0].id} className="Line">
+              <ul className="Line">
                 {line.map((cell) => (
                   <Cell
                     key={cell.id}
