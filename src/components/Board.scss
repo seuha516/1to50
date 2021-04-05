@@ -56,6 +56,15 @@
     text-shadow: 2px 2px 2px #427388;
   }
 }
+.Loading {
+  color: rgba(67, 242, 255, 0.692);
+  width: 210px;
+  height: 70px;
+  margin-top: -15px;
+  font-size: 60px;
+  letter-spacing: 0px;
+  font-family: "Londrina Solid", cursive;
+}
 @media all and (max-width: 490px) {
   .Board {
     width: 90vw;

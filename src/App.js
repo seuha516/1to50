@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import Ranking from "./components/Ranking";
 
 const App = () => {
-  const [name, setName] = useState(null);
+  const [name, setName] = useState("");
   return (
     <>
       <Switch>

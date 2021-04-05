@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import Board from "./Board";
 import Target from "./Target";
@@ -15,8 +16,42 @@ const Home = ({ name, setName }) => {
   const [wait, setWait] = useState(-1); //-1: 시작 전, 1~3: 카운트다운, 0: 게임중, 999: 재시작 대기
   const [waitRanking, setWaitRanking] = useState(false);
   const [leftnums, setLeftnums] = useState(fn.setList()); //보드에 없는 남은 숫자들
-
+  const [newRecord, setNewRecord] = useState(false);
   const timeComponent = useRef(); //타이머 컴포넌트 Ref
+
+  const get_date_str = (date) => {
+    let sYear = date.getFullYear() % 100;
+    let sMonth = date.getMonth() + 1;
+    let sDate = date.getDate();
+    let sHour = date.getHours();
+    let sMin = date.getMinutes();
+    sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
+    sDate = sDate > 9 ? sDate : "0" + sDate;
+    sHour = sHour > 9 ? sHour : "0" + sHour;
+    sMin = sMin > 9 ? sMin : "0" + sMin;
+    return `${sYear}.${sMonth}.${sDate} ${sHour}:${sMin}`;
+  };
+  const updateRanking = async (name, score) => {
+    if (name === "" || name === null) {
+      setWaitRanking(false);
+      return;
+    }
+    console.log(`${name}가 ${score / 100}초에 성공!`);
+    await axios
+      .post("https://one-to-fifty-backend.herokuapp.com/api/ranking/update", {
+        name: name,
+        score: score / 100,
+        date: get_date_str(new Date()),
+      })
+      .then((res) => {
+        console.log("기록갱신?", res.data);
+        setNewRecord(res.data);
+      })
+      .catch((err) => {
+        console.log("ERROR!", err);
+      });
+    setWaitRanking(false);
+  };
 
   //시작 버튼 클릭
   const onStartClick = async () => {
@@ -47,12 +82,14 @@ const Home = ({ name, setName }) => {
         sound.gameWin();
         setWait(999);
         setWaitRanking(true);
-        if (!name) {
-          await fn.delaySetWait(() => {}, null, 250);
-          let inputname = prompt("기록을 저장하려면 이름을 입력해 주세요.");
-          if (inputname !== "") setName(inputname);
+        if (name === "" || name === null) {
+          await fn.delaySetWait(() => {}, null, 150);
+          const newname = prompt("기록을 저장하려면 이름을 입력해 주세요.");
+          setName(newname);
+          updateRanking(newname, timeComponent.current.time);
+        } else {
+          updateRanking(name, timeComponent.current.time);
         }
-        setWaitRanking(false);
       } else {
         setTarget((target) => target + 1);
       }
@@ -78,8 +115,12 @@ const Home = ({ name, setName }) => {
       <Title wait={wait} />
       {(wait === 0 || wait === 999) && (
         <div className="Info">
-          {wait === 0 ? <Target target={target} /> : <Result />}
-          <Time ref={timeComponent} wait={wait} />
+          {wait === 0 ? (
+            <Target target={target} />
+          ) : (
+            <Result waitRanking={waitRanking} newRecord={newRecord} />
+          )}
+          <Time ref={timeComponent} wait={wait} waitRanking={waitRanking} />
         </div>
       )}
       <Board

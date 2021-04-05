@@ -1,5 +1,7 @@
 .Title {
   color: white;
+  width: 350px;
+  text-align: center;
   height: 70px;
   margin-bottom: 50px;
   font-size: 60px;
@@ -14,9 +16,13 @@
   &.restart {
     margin-bottom: 20px;
   }
+  &.pointer {
+    cursor: pointer;
+  }
 }
 @media all and (max-width: 490px) {
   .Title {
+    width: 90vw;
     font-size: 12vw;
     margin-bottom: 5vw;
     height: 14vw;

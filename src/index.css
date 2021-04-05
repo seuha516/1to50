@@ -26,6 +26,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: -webkit-linear-gradient(0deg, #0f0c29, #302b63, #24243e);
 }
+a {
+  text-decoration: none;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

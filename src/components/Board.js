@@ -35,7 +35,9 @@ const Board = ({ list, wait, onStartClick, onClick, target, waitRanking }) => {
             ))}
           </ul>
         ) : wait === 999 ? (
-          !waitRanking && (
+          waitRanking ? (
+            <div className="Loading">Loading...</div>
+          ) : (
             <div className="RestartButton" onClick={onStartClick}>
               Restart
             </div>

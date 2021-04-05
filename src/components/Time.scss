@@ -11,6 +11,9 @@
   &.restart {
     width: auto;
   }
+  &.waitRanking {
+    margin-left: 0;
+  }
 }
 @media all and (max-width: 490px) {
   .Time {

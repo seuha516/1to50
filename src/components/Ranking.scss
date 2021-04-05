@@ -1,0 +1,51 @@
+.rankingArea {
+  position: absolute;
+  left: 50%;
+  top: 25px;
+  transform: translate(-45vw, 0);
+  width: 90vw;
+  height: 95vh;
+  background-color: rgba(255, 255, 255, 0.041);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  .text {
+    color: rgb(174, 193, 255);
+    margin-top: -20px;
+    margin-bottom: 15px;
+    font-size: 45px;
+    letter-spacing: 1px;
+    font-family: "Righteous", cursive;
+    text-shadow: 0 2px rgba(128, 105, 255, 0.37);
+  }
+  .rankingLoading {
+    color: rgba(67, 242, 255, 0.692);
+    width: 210px;
+    height: 70px;
+    font-size: 60px;
+    letter-spacing: 0px;
+    font-family: "Londrina Solid", cursive;
+  }
+  .dataArea {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    .rankingData {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.473);
+      padding: 10px;
+      margin-bottom: 15px;
+      width: 86vw;
+    }
+  }
+}
+@media all and (max-width: 490px) {
+  .rankingArea {
+    .text {
+      font-size: 8vw;
+      letter-spacing: 0px;
+      margin-top: 10px;
+    }
+  }
+}

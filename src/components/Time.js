@@ -8,7 +8,7 @@ import React, {
 import * as fn from "../utils/functions";
 import "./Time.scss";
 
-const Time = forwardRef(({ wait }, ref) => {
+const Time = forwardRef(({ wait, waitRanking }, ref) => {
   const [time, setTime] = useState(0);
   const [min, sec] = fn.makeTimer(time);
   const TIMER = useRef(null);
@@ -21,10 +21,15 @@ const Time = forwardRef(({ wait }, ref) => {
     timerStop() {
       clearInterval(TIMER.current);
     },
+    time,
   }));
   return (
     <div
-      className={classNames("Time", wait === 999 && "restart")}
+      className={classNames(
+        "Time",
+        wait === 999 && "restart",
+        waitRanking && "waitRanking"
+      )}
     >{`${min}.${sec}`}</div>
   );
 });
