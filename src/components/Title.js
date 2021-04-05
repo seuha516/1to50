@@ -1,9 +1,16 @@
+import classNames from "classnames";
 import React from "react";
 import "./Title.scss";
 
-const Title = ({ marginBottom }) => {
+const Title = ({ wait }) => {
   return (
-    <div id="Title" style={marginBottom ? { marginBottom: "-100px" } : null}>
+    <div
+      className={classNames(
+        "Title",
+        wait === 0 && "ingame",
+        wait === 999 && "restart"
+      )}
+    >
       1 to 50
     </div>
   );

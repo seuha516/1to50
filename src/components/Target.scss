@@ -15,8 +15,7 @@
     text-shadow: 0 1px rgba(255, 255, 255, 0.5), 1px 0 rgba(255, 255, 255, 0.5),
       0 -1px rgba(255, 255, 255, 0.5);
     position: absolute;
-    top: 100px;
-    left: 47.5px;
+    margin-top: -20px;
   }
   .Target {
     color: rgb(190, 255, 252);
@@ -28,5 +27,29 @@
     vertical-align: middle;
     font-family: "Fugaz One", cursive;
     text-shadow: 0 3px rgb(0, 134, 175);
+  }
+}
+@media all and (max-width: 490px) {
+  .Box {
+    width: 35vw;
+    height: 20vw;
+    .Text {
+      font-size: 7.5vw;
+    }
+    .Target {
+      font-size: 10vw;
+    }
+  }
+}
+@media all and (max-height: 400px) and (min-width: 490px) {
+  .Box {
+    width: 35vh;
+    height: 20vh;
+    .Text {
+      font-size: 7.5vh;
+    }
+    .Target {
+      font-size: 10vh;
+    }
   }
 }

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, {
   forwardRef,
   useImperativeHandle,
@@ -7,7 +8,7 @@ import React, {
 import * as fn from "../utils/functions";
 import "./Time.scss";
 
-const Time = forwardRef((props, ref) => {
+const Time = forwardRef(({ wait }, ref) => {
   const [time, setTime] = useState(0);
   const [min, sec] = fn.makeTimer(time);
   const TIMER = useRef(null);
@@ -21,7 +22,11 @@ const Time = forwardRef((props, ref) => {
       clearInterval(TIMER.current);
     },
   }));
-  return <div className="Time">{`${min}:${sec}`}</div>;
+  return (
+    <div
+      className={classNames("Time", wait === 999 && "restart")}
+    >{`${min}.${sec}`}</div>
+  );
 });
 
 export default Time;

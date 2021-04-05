@@ -1,12 +1,26 @@
 .Time {
+  width: 140px;
   color: rgb(255, 184, 184);
-  width: 125px;
-  height: 60px;
   font-size: 45px;
   letter-spacing: 1px;
   font-family: "Righteous", cursive;
   text-shadow: 0 2px rgb(128, 105, 255);
   display: table-cell;
   vertical-align: middle;
-  margin-left: 40px;
+  margin-left: 30px;
+  &.restart {
+    width: auto;
+  }
+}
+@media all and (max-width: 490px) {
+  .Time {
+    width: 30vw;
+    font-size: 10vw;
+  }
+}
+@media all and (max-height: 400px) and (min-width: 490px) {
+  .Time {
+    width: 30vh;
+    font-size: 10vh;
+  }
 }

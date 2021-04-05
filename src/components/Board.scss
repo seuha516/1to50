@@ -56,3 +56,26 @@
     text-shadow: 2px 2px 2px #427388;
   }
 }
+@media all and (max-width: 490px) {
+  .Board {
+    width: 90vw;
+    height: 90vw;
+  }
+  .StartButton {
+    width: auto;
+    height: auto;
+    font-size: 20vw;
+  }
+}
+@media all and (max-height: 400px) and (min-width: 490px) {
+  .Board {
+    width: 90vh;
+    height: 90vh;
+    margin-bottom: 15px;
+  }
+  .StartButton {
+    width: auto;
+    height: auto;
+    font-size: 20vh;
+  }
+}

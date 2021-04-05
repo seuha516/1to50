@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import "./Board.scss";
 import Cell from "./Cell";
 
-const Board = ({ list, wait, onStartClick, onClick, target }) => {
+const Board = ({ list, wait, onStartClick, onClick, target, waitRanking }) => {
   const Count = useRef(null);
   useEffect(() => {
     if (!Count.current) return;
@@ -35,9 +35,11 @@ const Board = ({ list, wait, onStartClick, onClick, target }) => {
             ))}
           </ul>
         ) : wait === 999 ? (
-          <div className="RestartButton" onClick={onStartClick}>
-            Restart
-          </div>
+          !waitRanking && (
+            <div className="RestartButton" onClick={onStartClick}>
+              Restart
+            </div>
+          )
         ) : (
           <div ref={Count} className="Countdown">
             {wait}

@@ -1,7 +1,7 @@
 .Cell {
-  width: 73px;
-  height: 73px;
-  margin: 3px;
+  width: 75px;
+  height: 75px;
+  margin: 2px;
   border-radius: 12px;
   background-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
@@ -9,8 +9,10 @@
   font-size: 50px;
   line-height: 70px;
   color: rgba(255, 255, 255, 0.842);
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  text-align: center;
+  font-family: "Noto Sans JP", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
   &:hover {
@@ -21,5 +23,23 @@
       outline-offset: 15px;
       text-shadow: 1px 1px 2px #427388;
     }
+  }
+}
+@media all and (max-width: 490px) {
+  .Cell {
+    border: 2px solid rgba(116, 255, 243, 0.692);
+    margin: 0.5px;
+    width: calc(20vw - 9px);
+    height: calc(20vw - 9px);
+    font-size: 13vw;
+  }
+}
+@media all and (max-height: 400px) and (min-width: 490px) {
+  .Cell {
+    border: 2px solid rgba(116, 255, 243, 0.692);
+    margin: 0.5px;
+    width: calc(20vh - 9px);
+    height: calc(20vh - 9px);
+    font-size: 13vh;
   }
 }
