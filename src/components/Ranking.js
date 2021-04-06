@@ -47,9 +47,13 @@ const Ranking = ({ history }) => {
             {list.map((data, index) => (
               <div key={data._id} className="rankingData">
                 <div>{index + 1}</div>
-                <div>{data.name}</div>
-                <div>{data.score}</div>
-                <div>{data.date}</div>
+                <div>
+                  <div>
+                    <div>{data.name}</div>
+                    <div>{`${data.score}s`}</div>
+                  </div>
+                  <div>{data.date}</div>
+                </div>
               </div>
             ))}
           </div>
