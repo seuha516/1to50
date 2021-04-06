@@ -77,7 +77,7 @@ const Home = ({ name, setName }) => {
           )
         )
       );
-      if (target === 3) {
+      if (target === 50) {
         timeComponent.current.timerStop();
         sound.gameWin();
         setWait(999);
