@@ -1,23 +1,24 @@
-.Box {
+.box {
   width: 160px;
   height: 100px;
   border: 5px outset rgba(207, 198, 255, 0.151);
   border-radius: 20px;
-  display: table;
   background-color: rgba(255, 255, 255, 0.068);
-  .Text {
+  display: table;
+  margin-right: 30px;
+  .text {
     color: rgb(0, 0, 0);
     width: 100px;
-    height: 50px;
+    height: 30px;
     font-size: 35px;
+    font-family: 'Fugaz One', cursive;
     letter-spacing: 0px;
-    font-family: "Fugaz One", cursive;
     text-shadow: 0 1px rgba(255, 255, 255, 0.5), 1px 0 rgba(255, 255, 255, 0.5),
       0 -1px rgba(255, 255, 255, 0.5);
     position: absolute;
     margin-top: -20px;
   }
-  .Target {
+  .target {
     color: rgb(190, 255, 252);
     height: 50px;
     font-size: 50px;
@@ -25,31 +26,7 @@
     display: table-cell;
     text-align: center;
     vertical-align: middle;
-    font-family: "Fugaz One", cursive;
+    font-family: 'Fugaz One', cursive;
     text-shadow: 0 3px rgb(0, 134, 175);
-  }
-}
-@media all and (max-width: 490px) {
-  .Box {
-    width: 35vw;
-    height: 20vw;
-    .Text {
-      font-size: 7.5vw;
-    }
-    .Target {
-      font-size: 10vw;
-    }
-  }
-}
-@media all and (max-height: 400px) and (min-width: 490px) {
-  .Box {
-    width: 35vh;
-    height: 20vh;
-    .Text {
-      font-size: 7.5vh;
-    }
-    .Target {
-      font-size: 10vh;
-    }
   }
 }

@@ -1,21 +1,12 @@
-import classNames from "classnames";
-import React from "react";
-import "./Title.scss";
+import React from 'react';
+//style
+import classNames from 'classnames/bind';
+import styles from '../design/Title.module.scss';
+const cx = classNames.bind(styles);
 
-const Title = ({ wait, onClick, pointer }) => {
-  return (
-    <div
-      className={classNames(
-        "Title",
-        wait === 0 && "ingame",
-        wait === 999 && "restart",
-        pointer && "pointer"
-      )}
-      onClick={onClick}
-    >
-      1 to 50
-    </div>
-  );
+const Title = () => {
+  //return
+  return <div className={cx('title')}>1 to 50</div>;
 };
 
 export default Title;

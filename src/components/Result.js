@@ -1,26 +1,31 @@
-import React from "react";
-import "./Result.scss";
+import React from 'react';
+import { useSelector } from 'react-redux';
+//style
+import classNames from 'classnames/bind';
+import styles from '../design/Result.module.scss';
+const cx = classNames.bind(styles);
 
-const Result = ({ waitRanking, newRecord }) => {
+const Result = () => {
+  //상태 받아오기
+  const { rankLoading, newRecord } = useSelector(({ data }) => ({
+    rankLoading: data.rankLoading,
+    newRecord: data.newRecord,
+  }));
+  //공통 style
+  const style = {
+    opacity: rankLoading ? '0' : '1',
+    fontSize: rankLoading && '0px',
+    color: newRecord ? 'rgb(255, 74, 74)' : 'rgb(230, 255, 184)',
+    letterSpacing: newRecord ? '0px' : '1px',
+  };
+  //return
   return newRecord ? (
-    <div
-      className="Result new"
-      style={{
-        opacity: waitRanking ? "0" : "1",
-        fontSize: waitRanking && "0px",
-      }}
-    >
-      New Record!{" "}
+    <div className={cx('result', 'new')} style={style}>
+      New Record!
     </div>
   ) : (
-    <div
-      className="Result"
-      style={{
-        opacity: waitRanking ? "0" : "1",
-        fontSize: waitRanking && "0px",
-      }}
-    >
-      Result:{" "}
+    <div className={cx('result')} style={style}>
+      Result:
     </div>
   );
 };

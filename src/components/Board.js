@@ -1,54 +1,36 @@
-import React, { useEffect, useRef } from "react";
-import "./Board.scss";
-import Cell from "./Cell";
+import React from 'react';
+import { useSelector } from 'react-redux';
+//components
+import Cell from './Cell';
+import Text from './Text';
+//style
+import classNames from 'classnames/bind';
+import styles from '../design/Board.module.scss';
+const cx = classNames.bind(styles);
 
-const Board = ({ list, wait, onStartClick, onClick, target, waitRanking }) => {
-  const Count = useRef(null);
-  useEffect(() => {
-    if (!Count.current) return;
-    Count.current.animate([{ fontSize: "150px" }, { fontSize: "0px" }], {
-      duration: 500,
-      easing: "cubic-bezier(.66,.11,1,-0.08)",
-      fill: "forwards",
-    });
-  }, [wait]);
+const Board = () => {
+  //상태 가져오기
+  const { gameState, boardState } = useSelector(({ data, board }) => ({
+    gameState: data.gameState,
+    boardState: board.boardState,
+  }));
+  //return
   return (
-    <>
-      <div className="Board">
-        {wait < 0 ? (
-          <div className="StartButton" onClick={onStartClick}>
-            START
-          </div>
-        ) : wait === 0 ? (
-          <ul>
-            {list.map((line) => (
-              <ul className="Line">
-                {line.map((cell) => (
-                  <Cell
-                    key={cell.id}
-                    value={cell.value}
-                    onClick={onClick}
-                    target={target}
-                  />
-                ))}
-              </ul>
-            ))}
-          </ul>
-        ) : wait === 999 ? (
-          waitRanking ? (
-            <div className="Loading">Loading...</div>
-          ) : (
-            <div className="RestartButton" onClick={onStartClick}>
-              Restart
-            </div>
-          )
-        ) : (
-          <div ref={Count} className="Countdown">
-            {wait}
-          </div>
-        )}
-      </div>
-    </>
+    <div className={cx('board')}>
+      {gameState === 0 ? (
+        <ul>
+          {boardState.map((line) => (
+            <ul className={cx('line')}>
+              {line.map((cell) => (
+                <Cell key={cell.id} value={cell.value} />
+              ))}
+            </ul>
+          ))}
+        </ul>
+      ) : (
+        <Text />
+      )}
+    </div>
   );
 };
 
