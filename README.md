@@ -16,7 +16,7 @@
 * 구현 기능:
   * 1 to 50 게임 구현
   * 다음 숫자 표시 및 기록 측정 기능
-  * 랭킹 
+  * 랭킹 구현
 
 ## Other
 - [1to50_BackEnd](https://github.com/seuha516/1to50_BackEnd)
