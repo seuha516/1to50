@@ -1,4 +1,4 @@
-import { createAction, handleActions } from 'redux-actions';
+import { createAction, handleActions } from "redux-actions";
 import {
   all,
   call,
@@ -11,16 +11,16 @@ import {
   select,
   take,
   takeEvery,
-} from 'redux-saga/effects';
-import { eventChannel, buffers } from 'redux-saga';
+} from "redux-saga/effects";
+import { eventChannel, buffers } from "redux-saga";
 
-export const START = 'timer/START';
-export const PAUSE = 'timer/PAUSE';
-export const STOP = 'timer/STOP';
-export const WATCH = 'timer/WATHC';
-export const RESTART = 'timer/RESTART';
-export const SET_STATUS = 'timer/SET_STATUS';
-export const SET_COUNT = 'timer/SET_COUNT';
+export const START = "timer/START";
+export const PAUSE = "timer/PAUSE";
+export const STOP = "timer/STOP";
+export const WATCH = "timer/WATCH";
+export const RESTART = "timer/RESTART";
+export const SET_STATUS = "timer/SET_STATUS";
+export const SET_COUNT = "timer/SET_COUNT";
 
 export const start = createAction(START);
 export const watch = createAction(WATCH);
@@ -54,18 +54,18 @@ function* connectChannel() {
       let interval = timeTemp ? now - timeTemp : 0;
       timeTemp = now;
       yield flush(channel);
-      const store = yield select((state) => state.timer);
-      yield put(setCount(store.count + interval));
+      const count = yield select((state) => state.timer.count);
+      yield put(setCount(count + interval));
       // eslint-disable-next-line no-unused-vars
       const { timeout, pauseStatus } = yield race({
         timeout: delay(timer),
         pauseStatus: take(pause),
       });
       if (pauseStatus) {
-        yield put(setStatus('pause'));
+        yield put(setStatus("pause"));
         timeTemp = null;
         yield take(restart);
-        yield put(setStatus('play'));
+        yield put(setStatus("play"));
       }
     }
   } catch (error) {
@@ -81,14 +81,14 @@ function* startSaga() {
 function* watcherSaga() {
   while (yield take(watch)) {
     try {
-      yield put(setStatus('play'));
+      yield put(setStatus("play"));
       const worker = yield fork(connectChannel);
       yield take(stop);
       yield cancel(worker);
     } catch (error) {
       console.error(error);
     } finally {
-      yield all([put(setStatus('stop')), put(setCount(0))]);
+      yield all([put(setStatus("stop")), put(setCount(0))]);
     }
   }
 }
@@ -98,7 +98,7 @@ export function* timerSaga() {
 }
 
 const initialState = {
-  status: 'stop',
+  status: "stop",
   count: 0,
 };
 
@@ -113,7 +113,7 @@ const status = handleActions(
       return { ...state, count };
     },
   },
-  initialState,
+  initialState
 );
 
 export default status;

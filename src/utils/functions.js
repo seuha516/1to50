@@ -26,7 +26,7 @@ export const setList = (start, end) => {
 // 리스트에서 뽑은 수, 뽑고 난 뒤 리스트 반환
 export const findnextnum = (list) => {
   if (list.length === 0) {
-    return ['', []];
+    return ["", []];
   }
   let index = Math.floor(Math.random() * list.length);
   let nextnum = list[index];
@@ -35,12 +35,10 @@ export const findnextnum = (list) => {
 };
 // time을 초, 소수점으로 반환
 export const makeTimer = (time) => {
-  const format_front = (num) => (num < 10 ? `0${num}` : String(num));
-  const format_back = (num) =>
-    num < 10 ? `00${num}` : num < 100 ? `0${num}` : String(num);
+  const format = (num) => (num < 10 ? `0${num}` : String(num));
   const sec_front = Math.floor(time / 1000);
-  const sec_back = Math.floor(time - sec_front * 1000);
-  return [format_front(sec_front), format_back(sec_back)];
+  const sec_back = Math.floor((time - sec_front * 1000) / 10);
+  return [format(sec_front), format(sec_back)];
 };
 // 현재 시간 문자열 반환
 export const get_date_str = () => {
@@ -50,9 +48,9 @@ export const get_date_str = () => {
   let sDate = date.getDate();
   let sHour = date.getHours();
   let sMin = date.getMinutes();
-  sMonth = sMonth > 9 ? sMonth : '0' + sMonth;
-  sDate = sDate > 9 ? sDate : '0' + sDate;
-  sHour = sHour > 9 ? sHour : '0' + sHour;
-  sMin = sMin > 9 ? sMin : '0' + sMin;
+  sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
+  sDate = sDate > 9 ? sDate : "0" + sDate;
+  sHour = sHour > 9 ? sHour : "0" + sHour;
+  sMin = sMin > 9 ? sMin : "0" + sMin;
   return `${sYear}.${sMonth}.${sDate} ${sHour}:${sMin}`;
 };

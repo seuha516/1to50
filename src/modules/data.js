@@ -1,18 +1,18 @@
-import { createAction, handleActions } from 'redux-actions';
-import { call, delay, put, select, takeLatest } from 'redux-saga/effects';
-import { setBoardState, setLeftNumbers, setTarget } from './board';
-import * as fn from '../utils/functions';
-import * as sound from '../utils/sound';
-import { pause, start, stop } from './timer';
-import axios from 'axios';
+import axios from "axios";
+import { createAction, handleActions } from "redux-actions";
+import { call, delay, put, select, takeLatest } from "redux-saga/effects";
+import { setBoardState, setLeftNumbers, setTarget } from "./board";
+import { pause, start, stop } from "./timer";
+import * as fn from "../utils/functions";
+import * as sound from "../utils/sound";
 
 //액션
-const SET_NAME = 'data/SET_NAME';
-const SET_GAME_STATE = 'data/SET_GAME_STATE';
-const SET_RANK_LOADING = 'data/SET_RANK_LOADING';
-const SET_NEW_RECORD = 'data/SET_NEW_RECORD';
-const GAME_START = 'data/GAME_START';
-const GAME_END = 'data/GAME_END';
+const SET_NAME = "data/SET_NAME";
+const SET_GAME_STATE = "data/SET_GAME_STATE";
+const SET_RANK_LOADING = "data/SET_RANK_LOADING";
+const SET_NEW_RECORD = "data/SET_NEW_RECORD";
+const GAME_START = "data/GAME_START";
+const GAME_END = "data/GAME_END";
 
 //액션 생성 함수
 export const setName = createAction(SET_NAME);
@@ -23,15 +23,10 @@ export const gameStart = createAction(GAME_START);
 export const gameEnd = createAction(GAME_END);
 
 //API 요청
-function getListAPI() {
-  return axios.get(
-    'https://one-to-fifty-backend.herokuapp.com/api/ranking/list',
-  );
-}
 function postDataAPI(data) {
   return axios.post(
-    'https://one-to-fifty-backend.herokuapp.com/api/ranking/update',
-    data,
+    "https://one-to-fifty-backend.herokuapp.com/api/ranking/update",
+    data
   );
 }
 
@@ -50,6 +45,7 @@ function* gameStartSaga() {
   yield put(start());
 }
 function* gameEndSaga() {
+  sound.gameWin();
   yield put(pause());
   yield put(setGameState(-2));
   yield put(setRankLoading(true));
@@ -57,10 +53,10 @@ function* gameEndSaga() {
   const count = yield select((store) => store.timer.count);
   yield delay(500);
   let newname = name;
-  if (newname === '' || newname === null) {
-    newname = prompt('기록을 저장하려면 이름을 입력해 주세요.');
+  if (newname === "" || newname === null) {
+    newname = prompt("기록을 저장하려면 이름을 입력해 주세요.");
   }
-  if (newname === '' || newname === null) {
+  if (newname === "" || newname === null) {
     yield put(setRankLoading(false));
     return;
   }
@@ -72,10 +68,12 @@ function* gameEndSaga() {
       score: count / 1000,
       date: fn.get_date_str(new Date()),
     });
-    console.log('업로드 성공', response.data);
+    console.log("업로드 성공", response.data);
     yield put(setNewRecord(response.data));
   } catch (e) {
-    console.log('오류 발생', e);
+    console.log("오류 발생", e);
+    alert("서버와 연결되지 않아 기록을 업로드하지 못했습니다.");
+    yield put(setNewRecord(false));
   }
   yield put(setRankLoading(false));
 }
@@ -112,6 +110,6 @@ const data = handleActions(
       newRecord: action.payload,
     }),
   },
-  initialState,
+  initialState
 );
 export default data;
