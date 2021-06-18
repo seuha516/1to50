@@ -25,7 +25,7 @@ export const gameEnd = createAction(GAME_END);
 //API 요청
 function postDataAPI(data) {
   return axios.post(
-    "https://one-to-fifty-backend.herokuapp.com/api/ranking/update",
+    `${process.env.REACT_APP_API_URL}/api/ranking/update`,
     data
   );
 }

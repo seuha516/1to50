@@ -18,7 +18,7 @@ let repeatLimit = 2;
 const wakeUpServer = () => {
   console.log("서버 가동 요청을 보냈습니다.");
   axios
-    .get("https://one-to-fifty-backend.herokuapp.com/api/ranking/check")
+    .get(`${process.env.REACT_APP_API_URL}/api/ranking/check`)
     .then((res) => {
       console.log(res.data);
     })

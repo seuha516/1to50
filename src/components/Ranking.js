@@ -16,7 +16,7 @@ const Ranking = ({ history }) => {
   const loadList = useCallback(async () => {
     console.log("랭킹 요청 보냄");
     await axios
-      .get("https://one-to-fifty-backend.herokuapp.com/api/ranking/list")
+      .get(`${process.env.REACT_APP_API_URL}/api/ranking/list`)
       .then((res) => {
         console.log(res.data);
         setList(res.data);
